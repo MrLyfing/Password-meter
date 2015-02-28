@@ -11,6 +11,7 @@
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 
+	<script type="text/javascript" src="app/services/services.js"></script>
 	<script type="text/javascript" src="app/controllers/public.module.js"></script>
 	<script type="text/javascript" src="app/controllers/main.controller.js"></script>
 
@@ -31,7 +32,7 @@
 				<form role="form" novalidate>
 					<div class="form-group">
 						<label for="pwd">Type your password</label>
-						<input type="{{input_type}}" class="form-control" id="pwd">
+						<input type="{{input_type}}" class="form-control" id="pwd" ng-model="user.password">
 					</div>
 					<div class="checkbox">
 						<label>
@@ -41,13 +42,19 @@
 				</form>
 
 				<div class="progress">
-					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{password_strengh}}" aria-valuemin="0" aria-valuemax="100" style="width: {{password_strengh}}">
+					<div ngclass="bar_color" role="progressbar" aria-valuenow="{{password_strengh}}" aria-valuemin="0" aria-valuemax="100" style="width: {{password_strengh}}%">
+					</div>
+				</div>
+
+				<div class="panel panel-danger">
+					<div class="panel-heading">Requirements</div>
+					<div class="panel-body">
+						<p>...</p>
 					</div>
 				</div>
 				
 			</div>
 		</div>
-	</div>
-	
-</body>
-</html>
+
+	</body>
+	</html>
