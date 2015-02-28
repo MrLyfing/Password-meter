@@ -42,19 +42,24 @@
 				</form>
 
 				<div class="progress">
-					<div ngclass="bar_color" role="progressbar" aria-valuenow="{{password_strengh}}" aria-valuemin="0" aria-valuemax="100" style="width: {{password_strengh}}%">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{password_strengh}}" aria-valuemin="0" aria-valuemax="100" style="width: {{password_strengh}}%">
 					</div>
 				</div>
 
-				<div class="panel panel-danger">
-					<div class="panel-heading">Requirements</div>
+				<div class="panel panel-danger" ng-show="showRequirements">
+					<div class="panel-heading">
+						<h3 class="panel-title">Requirements</h3>
+					</div>
 					<div class="panel-body">
-						<p>...</p>
+						<ul>
+							<li ng-repeat="requirement in requirements">{{ requirement }}</li>
+						</ul>
 					</div>
 				</div>
 				
 			</div>
 		</div>
+	</div>
 
-	</body>
-	</html>
+</body>
+</html>

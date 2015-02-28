@@ -17,7 +17,7 @@ factory('ServicesUser', function() {
 			for (var key in conditions)
 				conditions_met += (conditions[key]) ? 1 : 0;
 
-			score += (conditions_met - 1) * 10;
+			score *= conditions_met;
 		}
 		else
 			score = 0;

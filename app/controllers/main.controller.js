@@ -2,25 +2,28 @@ angular.module('app')
 .controller('mainCtrl', ['$scope', 'ServicesUser', function($scope, ServicesUser) {
 	$scope.input_type = "password";
 	$scope.password_strengh = 0;
-	$scope.bar_color = "progress-bar progress-bar-success"
 
 	$scope.$watch('user.password', function(value) {
-		if (value != undefined) {
-			$scope.password_strengh = ServicesUser.getPassword_strengh(value);
-			console.log(ServicesUser.getPassword_strengh(value));
-			console.log(value);
-		}
+		$scope.requirements = [];
+		if (value == undefined)
+			return;
 
-		if ($scope.password_strengh > 100)
-			$scope.password_strengh = 100;
+		$scope.password_strengh = ServicesUser.getPassword_strengh(value);
+		console.log(ServicesUser.getPassword_strengh(value));
+
+		if (value.length < 5)
+			$scope.requirements.push('At least 5 characters');
+		
+		if (/^[0-9]*$/.test(value) || /^[a-zA-z]*$/.test(value)) //if contains only characters or only digits
+			$scope.requirements.push('At least one character and one digit');
+
+		$scope.showRequirements = (value == '') ? 0 : $scope.requirements.length;
 	});
 
 	$scope.show_password = function() {
-		if ($scope.input_type == "password")
-			$scope.input_type = "text";
+		if ($scope.input_type == 'password')
+			$scope.input_type = 'text';
 		else
-			$scope.input_type = "password";
+			$scope.input_type = 'password';
 	};
-
-
 }]);
