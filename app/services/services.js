@@ -13,12 +13,12 @@ factory('ServicesUser', function() {
 		};
 
 		if (password.length >= 5 && (conditions.upper || conditions.lower) && conditions.digit) {
-			score = password.length;
+			score = check_repeat(password);
 
 			for (var key in conditions)
 				conditions_met += (conditions[key]) ? 1 : 0;
 
-			score *= conditions_met;
+			score += conditions_met * 10; //bonus
 		}
 		else
 			score = 0;
@@ -26,20 +26,21 @@ factory('ServicesUser', function() {
 		if (score > 100)
 			score = 100;
 
-		return score;
+		return Math.round(score);
 	};
 
-	/*
+	function check_repeat(str) { //Check the occurences in the password
+		var occ_alpha = {};
+		var new_score = 0;
+		for (i = 0; i < 128; i++) //ASCII table
+			occ_alpha[String.fromCharCode(i)] = 0;
 
-	function check_repet(str) { //return biggest repetition
-		var max_repet = 0;
-		var buff = str[0]
-		for (i = 1; i < str.length; i++) {
-			if (buff == str[i])
-				max_repet++;
+		for (i = 0; i < str.length; i++) {
+			occ_alpha[str[i]] += 1;
+			new_score += 3.0 / occ_alpha[str[i]]; 
 		}
-
-	}*/
+		return new_score;
+	}
 
 	return ServicesUser;
 });
