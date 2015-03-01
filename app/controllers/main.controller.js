@@ -25,7 +25,6 @@ angular.module('app')
 		else
 			$scope.input_type = 'password';
 	};
-	
 
 	function progressBar_color() {
 		if ($scope.password_strengh <= 35)
